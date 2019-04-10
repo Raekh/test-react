@@ -1,6 +1,73 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+class Love extends React.Component {
+  constructor(props) {
+    super(props) 
+    this.state = {
+      love:""
+    } 
+    this.handleChange = this.handleChange.bind(this)
+    this.getText = this.getText.bind(this)
+  }
+  
+  handleChange = e=>{
+    var t = e.target.value
+    this.setState({
+      love:t
+    })
+  }
+  
+  getText = () => {
+    switch(this.state.love){
+      case 'yes':
+      return "Me too... 💜 "
+      
+      case 'no' :
+      return ":<"
+      
+      default:
+      return ''
+    }
+  }
+  
+  render() {
+    return (
+      <form>
+      <fieldset>
+        <legend>Do you love me? </legend>
+        
+        <LoveRadio onChange={this.handleChange} name="love" value="yes" text="Yes" />
+        <LoveRadio onChange={this.handleChange} name="love" value="no" text="No" />
+        <p>{this.getText()}</p>
+     </fieldset>
+     </form>
+   ) 
+  }
+}
+
+class LoveRadio extends React.Component {
+  constructor(props) {
+    super(props) 
+    this.state = {
+      parentval: ''
+    }
+    this.change = this.change.bind(this) 
+  } 
+  
+  change = e => {
+    this.props.onChange(e) 
+  }
+  
+  render() {
+    return(
+      <div>
+      <input name={this.props.name} type='radio' value={this.props.value} onChange={this.change} />
+      <label for={this.props.name}>{this.props.text}</label>
+      </div>
+      )
+  }
+}
 
 class CustomObject extends React.Component{
 	constructor(props){
@@ -117,9 +184,7 @@ class Main extends React.Component{
 		
 		return(
 			<div className="">
-				<Title label={this.props.title} />
-				<Paragraph text={this.props.text} />
-				<Box title="test box" objects={this.state.objects} />
+				<Love />
 			</div>
 		)
 	}
