@@ -93,10 +93,10 @@ class CustomObject extends React.Component{
 
 			case 'checkbox':
 			return (
-				<div>
+				<React.Fragment>
 					<label for={properties.name}>{properties.label}</label>
 					<input name={properties.name} type="checkbox"></input>
-				</div>
+				</React.Fragment>
 			)
 
 			default:
